@@ -1,0 +1,39 @@
+.custom-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  /* Primary style */
+  .custom-btn.primary {
+    background-color: var(--color-title);
+    color:var(--color-component);
+  }
+  
+  .custom-btn.primary:hover {
+    background-color: var(--color-component-hover);
+  }
+  
+  /* Secondary style */
+  .custom-btn.secondary {
+    background-color: transparent;
+    color: var(--color-component);
+    border: 2px solid var(--color-component);
+  }
+  
+  .custom-btn.secondary:hover {
+    background-color: var(--color-component);
+    color: var(--color-text);
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .custom-btn {
+      width: 80%;
+    }
+  }
+  

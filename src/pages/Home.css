@@ -1,0 +1,220 @@
+.home {
+    font-family: Arial, sans-serif;
+    color: var(--color-background);
+    overflow-x: hidden;
+    margin: -10%;
+    padding: 0;
+  }
+  
+  /* Hero Section */
+  .hero {
+    background: url("/public/images/hero-bg.jpg.jpg") center/cover no-repeat;
+    color: var(--color-text);
+    text-align: center;
+    padding: 120px 20px;
+    height: 40vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Features Section */
+  .features {
+    padding: 80px 120px;
+    background: var(--color-background);
+    text-align: center;
+  }
+  
+  .features h2 {
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    color: var(--color-title);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  /* Individual Cards */
+  .feature-card {
+    background: var(--color-component);
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  
+  /* Hover Glow + Lift */
+  .feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Subtle top gradient accent on hover */
+  .feature-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--color-text), var(--color-title));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  
+  .feature-card:hover::before {
+    transform: scaleX(1);
+  }
+  
+  /* SVG / Image Styling */
+  .feature-card img {
+    border-radius: 50%;
+    height: 170px;
+    width: 170px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Slight zoom on hover */
+  .feature-card:hover img {
+    transform: scale(1.1);
+  }
+  
+  /* Text Styling */
+  .feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  
+  .feature-card p {
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  
+  /* Featured Tour */
+  .featured-tour {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+  }
+  
+  .tour-image img {
+    width: 100%;
+    border-radius: 10px;
+    max-width: 550px;
+  }
+  
+  .tour-text {
+    flex: 1;
+    min-width: 280px;
+  }
+  
+  .tour-text h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  .secondary-btn {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .secondary-btn:hover {
+    background: #111;
+  }
+  
+  /* Testimonials */
+  .testimonials {
+    background: var(--color-background);
+    padding: 80px 20px;
+    text-align: center;
+  }
+  
+  .testimonials h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  
+  .testimonial {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    background: var(--color-component);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .testimonial p {
+    font-style: italic;
+    margin-bottom: 15px;
+  }
+  
+  /* Footer */
+  .footer {
+    background: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.2rem;
+    }
+    .tour-text h2 {
+      font-size: 1.6rem;
+    }
+    .feature-card {
+      padding: 30px 20px;
+    }
+    .feature-card img {
+      height: 60px;
+      width: 60px;
+    }
+  }
+  

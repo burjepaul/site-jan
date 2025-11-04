@@ -1,0 +1,93 @@
+/* Root container */
+.gallery-page {
+    min-height: 100vh;
+    background-color: var(--color-component);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    margin: -9%;
+  }
+  
+  /* Title styling */
+  .gallery-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color:var(--color-title);
+    margin-bottom: 2rem;
+    text-align: center;
+    padding-top: 6%;
+  }
+  
+  /* Masonry-style layout using CSS columns */
+  .gallery-grid {
+    columns: 1;
+    column-gap: 1rem;
+    width: 85%;
+    max-width: 1400px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Responsive column layout */
+  @media (min-width: 640px) {
+    .gallery-grid {
+      columns: 2;
+    }
+  }
+  @media (min-width: 900px) {
+    .gallery-grid {
+      columns: 3;
+    }
+  }
+  @media (min-width: 1200px) {
+    .gallery-grid {
+      columns: 4;
+    }
+  }
+  
+  /* Each item avoids breaking across columns */
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(10px);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  
+  /* Slight stagger effect on load */
+  .gallery-item:nth-child(odd) {
+    animation-delay: 0.1s;
+  }
+  .gallery-item:nth-child(even) {
+    animation-delay: 0.2s;
+  }
+  
+  /* Image styling */
+  .gallery-img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Hover effect */
+  .gallery-item:hover .gallery-img {
+    transform: scale(1.05);
+  }
+  
+  /* Animation for fade-up entrance */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
