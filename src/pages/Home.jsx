@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
 import './Home.css';
 import Button from "../components/Button/Button";
 import autc from '../assets/autentic.jpg';
 import incoltire from '../assets/incoltire.jpg'
 import plante from '../assets/plante.jpg'
 import comunitate from '../assets/comunitate.jpg'
+import AuthModalManager from "../components/AuthModal/AuthModalManager";
+
 
 
 function Home() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = () => {
+    signOut(auth);
+  };
+
   return(
     <main className="home">
       {/* Hero Section */}
@@ -15,11 +32,20 @@ function Home() {
         <div className="hero-content">
           <h1>Stejarul lui Avram Iancu</h1>
           <p>Liciteaza pentru ghinzile</p>
-          <Button
-              label="Sign Up"
-              type="primary"
-              onClick={() => alert("Button clicked!")}
-            />
+          <AuthModalManager />
+          <div>
+      {user ? (
+        <div style={{ textAlign: "center", marginTop: "3rem" }}>
+          <h2>Bun venit, {user.email}!</h2>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <>
+          {/* <Signup />
+          <Login /> */}
+        </>
+      )}
+    </div>
         </div>
       </section>
 
