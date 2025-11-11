@@ -30,8 +30,8 @@ export default function AuthModalManager() {
               ×
             </button>
 
-            {activeModal === "login" && <Login />}
-            {activeModal === "signup" && <Signup />}
+            {activeModal === "login" && <Login onClose={closeModal}/>}
+            {activeModal === "signup" && <Signup onClose={closeModal}/>}
           </div>
         </div>
       )}

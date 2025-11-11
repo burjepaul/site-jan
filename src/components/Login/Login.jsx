@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import "./Login.css";
 
-export default function Login() {
+export default function Login({ onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,9 +12,9 @@ export default function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Logged in successfully!");
       setEmail("");
       setPassword("");
+      if (onClose) onClose();
     } catch (err) {
       setError(err.message);
     }
