@@ -21,7 +21,7 @@ const Card = ({ product })=> {
 
     console.log(profile)
 
-    const { name, last_offer, second_to_last_offer, time_of_last_offer, user_with_last_offer } =  product;
+    const { name, last_offer, time_of_last_offer, user_with_last_offer } =  product;
     return (
       profile? 
 
