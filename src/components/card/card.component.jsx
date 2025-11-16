@@ -8,6 +8,7 @@ import Button from '../Button/Button';
 const Card = ({ product })=> {
     const { user } = useAuth();
     const [profile, setProfile] = useState(null)
+    const { name, last_offer, time_of_last_offer, user_with_last_offer } =  product;
 
     useEffect(() => {
       async function load() {
@@ -17,11 +18,10 @@ const Card = ({ product })=> {
         }
       }
       load();
-    }, [user_with_last_offer]);
+    }, [user, user_with_last_offer]);
 
     console.log(profile)
 
-    const { name, last_offer, time_of_last_offer, user_with_last_offer } =  product;
     return (
       profile? 
 
