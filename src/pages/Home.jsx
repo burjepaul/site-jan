@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import React from "react";
 import './Home.css';
 import Button from "../components/Button/Button";
 import autc from '../assets/autentic.jpg';
@@ -8,22 +6,14 @@ import incoltire from '../assets/incoltire.jpg'
 import plante from '../assets/plante.jpg'
 import comunitate from '../assets/comunitate.jpg'
 import AuthModalManager from "../components/AuthModal/AuthModalManager";
+import { useAuth } from "../context/AuthContext";
 
 
 
 function Home() {
-  const [user, setUser] = useState(null);
+  const {user, logout, profile}  = useAuth();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleLogout = () => {
-    signOut(auth);
-  };
+  console.log(profile)
 
   return(
     <main className="home">
@@ -32,17 +22,19 @@ function Home() {
         <div className="hero-content">
           <h1>Stejarul lui Avram Iancu</h1>
           <p>Liciteaza pentru ghinzile</p>
-          <AuthModalManager />
           <div>
       {user ? (
         <div style={{ textAlign: "center", marginTop: "3rem" }}>
-          <h2>Bun venit, {user.email}!</h2>
-          <button onClick={handleLogout}>Logout</button>
+          {profile ?
+            <h2>Bun venit, {profile.nickname}!</h2>
+            :
+            <></>
+          }
+          <button onClick={logout}>Logout</button>
         </div>
       ) : (
         <>
-          {/* <Signup />
-          <Login /> */}
+          <AuthModalManager />
         </>
       )}
     </div>

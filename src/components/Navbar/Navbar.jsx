@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../Button/Button";
 import "./Navbar.css";
 import { ReactComponent as Logo } from "../../assets/acorn.svg";
+import { useAuth } from "../../context/AuthContext";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,6 +10,8 @@ function Navbar() {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const {user}  = useAuth();
 
   return (
     <nav className="navbar">
@@ -29,14 +31,15 @@ function Navbar() {
           <li><Link to="/Galerie" onClick={() => setMenuOpen(false)}>Galerie</Link></li>
           <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
           <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
+          {user ? 
+            <li><Link to="/licitatie" onClick={() => setMenuOpen(false)}>Licitatie</Link></li>
+            :
+            <></>
+          }
           <li><Link to="/FAQ" onClick={() => setMenuOpen(false)}>FAQ</Link></li>
 
           <li>
-            <Button
-              label="Sign Up"
-              type="primary"
-              onClick={() => alert("Button clicked!")}
-            />
+            <p>{user ? `${user.email}` : ""}</p>
           </li>
         </ul>
       </div>

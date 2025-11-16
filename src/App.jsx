@@ -6,8 +6,10 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import Galerie from "./pages/Galerie";
+import Licitatie from "./pages/Licitatie";
 
 function App() {
+
   return (
     <div>
       <Navbar />
@@ -18,6 +20,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/Galerie" element={<Galerie />} />
+          <Route path="/Licitatie" element={<Licitatie />} />
         </Routes>
       </div>
     </div>

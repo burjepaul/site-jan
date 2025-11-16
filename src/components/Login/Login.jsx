@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
-import "./Login.css";
+import { supabase } from "../../supabase";
 
 export default function Login({ onClose }) {
   const [email, setEmail] = useState("");
@@ -10,37 +8,45 @@ export default function Login({ onClose }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      setEmail("");
-      setPassword("");
-      if (onClose) onClose();
-    } catch (err) {
-      setError(err.message);
+
+    const { error: loginErr } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (loginErr) {
+      setError(loginErr.message);
+      return;
     }
+
+    onClose();
   };
 
   return (
-    <div className="auth-container">
-      <h2>Login</h2>
+    <div className="auth-modal">
       <form onSubmit={handleLogin}>
+        <h2>Login</h2>
+
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
         />
+
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
+
         {error && <p className="error">{error}</p>}
+
         <button type="submit">Login</button>
       </form>
+
+      <button className="close-btn" onClick={onClose}>X</button>
     </div>
   );
 }
