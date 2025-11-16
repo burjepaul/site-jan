@@ -17,7 +17,7 @@ const Card = ({ product })=> {
         }
       }
       load();
-    }, [user]);
+    }, [user_with_last_offer]);
 
     console.log(profile)
 
