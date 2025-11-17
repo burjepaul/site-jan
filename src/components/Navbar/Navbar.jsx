@@ -31,11 +31,7 @@ function Navbar() {
           <li><Link to="/Galerie" onClick={() => setMenuOpen(false)}>Galerie</Link></li>
           <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
           <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
-          {user ? 
-            <li><Link to="/licitatie" onClick={() => setMenuOpen(false)}>Licitatie</Link></li>
-            :
-            <></>
-          }
+          <li><Link to="/licitatie" onClick={() => setMenuOpen(false)}>Licitatie</Link></li>
           <li><Link to="/FAQ" onClick={() => setMenuOpen(false)}>FAQ</Link></li>
 
           <li>

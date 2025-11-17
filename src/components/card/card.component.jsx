@@ -3,12 +3,16 @@ import './card.styles.css'
 import certificat from '../../assets/Certificat.jpg'
 import { useAuth } from '../../context/AuthContext';
 import { getProfileById } from '../../utils';
-import Button from '../Button/Button';
+import NewBidModal from '../LicitaiteNowModal/LicitatieNewModal';
+import { supabase } from '../../supabase';
 
-const Card = ({ product })=> {
+const Card = ({ product, connected })=> {
     const { user } = useAuth();
     const [profile, setProfile] = useState(null)
-    const { name, last_offer, time_of_last_offer, user_with_last_offer } =  product;
+    const [cardProduct, setCardProduct] = useState(product)
+    const { name, last_offer, time_of_last_offer, user_with_last_offer } =  cardProduct;
+
+    const [showBid, setShowBid] = useState(false);
 
     useEffect(() => {
       async function load() {
@@ -20,7 +24,17 @@ const Card = ({ product })=> {
       load();
     }, [user, user_with_last_offer]);
 
-    console.log(profile)
+    async function loadProducts() {
+      const { data } = await supabase.from("products").select("*").eq("name", name).single();
+      setCardProduct(data);
+    }
+
+    useEffect(() => {
+      loadProducts();   // load on page open
+      // eslint-disable-next-line
+    }, []);
+
+    // console.log(profile)
 
     return (
       profile? 
@@ -33,8 +47,15 @@ const Card = ({ product })=> {
             alt={`Ghinda No. ${name}`}
             />
           <h3>Pret actual {last_offer} lei licitat la {time_of_last_offer} de catre {profile.nickname}</h3>
-          <Button label={"Liciteaza"}/>
         {/* <h2>Ghinda No. {second_to_last_offer}</h2> */}
+            {connected?
+            <>
+              <button onClick={() => setShowBid(true)}>Deschide Licitație</button>
+              {showBid && <NewBidModal productItem={name} actualPrice={last_offer} onSuccess={loadProducts} onClose={() => setShowBid(false)}/>}
+            </>
+              :
+              <></>
+            }
         </div>
         :
         <div className="card-container">
@@ -45,7 +66,14 @@ const Card = ({ product })=> {
             alt={`Ghinda No. ${name}`}
             />
           <h3>Pret initial 100 lei</h3>
-          <Button label={"Liciteaza"}/>
+            {connected?
+            <>
+              <button onClick={() => setShowBid(true)}>Deschide Licitație</button>
+              {showBid && <NewBidModal productItem={name} actualPrice={last_offer} onClose={() => setShowBid(false)}/>}
+            </>
+              :
+              <></>
+            }
           {/* <h2>Ghinda No. {second_to_last_offer}</h2> */}
       </div>
       )

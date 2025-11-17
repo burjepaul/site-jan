@@ -5,7 +5,7 @@ import CardList from "../components/card-list/card-list.component";
 function Licitatie() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     async function fetchproducts() {
       const { data, error } = await supabase

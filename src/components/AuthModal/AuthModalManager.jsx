@@ -23,12 +23,9 @@ export default function AuthModalManager() {
       {activeModal && (
         <div className="auth-overlay" onClick={closeModal}>
           <div
-            className="auth-modal"
+            className=""
             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
           >
-            <button className="close-btn" onClick={closeModal}>
-              ×
-            </button>
 
             {activeModal === "login" && <Login onClose={closeModal}/>}
             {activeModal === "signup" && <Signup onClose={closeModal}/>}

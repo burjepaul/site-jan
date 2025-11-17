@@ -1,8 +1,11 @@
 import Card from "../card/card.component";
 import './card-list.styles.css'
+import { useAuth } from "../../context/AuthContext";
 
-const CardList = ({ products }) => {
+const CardList = ({ products}) => {
+  const {user}  = useAuth();
 
+  const connected = !!user
 
   const sortedProducts = [...products].sort((a, b) => {
     return Number(a.name) - Number(b.name);
@@ -13,7 +16,7 @@ const CardList = ({ products }) => {
         {sortedProducts.map((product) => {
           return (
             <>
-            <Card product={product} key={product.id}/>
+            <Card product={product} connected={connected} key={product.id}/>
             </>
           );
         })}
