@@ -8,6 +8,11 @@
   z-index: 1000;
 }
 
+.nav-button{
+  margin-left: 30%;
+  scale: 0.9;
+}
+
 /* Flexbox layout */
 .nav-container {
   display: flex;

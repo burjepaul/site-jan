@@ -11,7 +11,7 @@ function Navbar() {
     setMenuOpen(!menuOpen);
   };
 
-  const {user}  = useAuth();
+  const {user, logout}  = useAuth();
 
   return (
     <nav className="navbar">
@@ -33,9 +33,17 @@ function Navbar() {
           <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
           <li><Link to="/licitatie" onClick={() => setMenuOpen(false)}>Licitatie</Link></li>
           <li><Link to="/FAQ" onClick={() => setMenuOpen(false)}>FAQ</Link></li>
-
-          <li>
-            <p>{user ? `${user.email}` : ""}</p>
+          <li className="nav-user-details">
+            {
+                user ?
+                  <>
+                    <p>{user.email}</p>
+                    <button className="nav-button" onClick={logout}>Logout</button>
+                  </>
+                  :
+                  <>
+                  </>
+            }
           </li>
         </ul>
       </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "../../supabase";
+import './Login.css'
 
 export default function Login({ onClose }) {
   const [email, setEmail] = useState("");
@@ -23,30 +24,32 @@ export default function Login({ onClose }) {
   };
 
   return (
-    <div className="auth-modal">
-      <form onSubmit={handleLogin}>
-        <h2>Login</h2>
+    <div className="auth-modal-overlay">
+      <div className="auth-modal">
+        <form onSubmit={handleLogin}>
+          <h2>Login</h2>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        {error && <p className="error">{error}</p>}
+          {error && <p className="error">{error}</p>}
 
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit">Login</button>
+        </form>
 
-      <button className="close-btn" onClick={onClose}>X</button>
+        <button className="close-btn" onClick={onClose}>×</button>
+      </div>
     </div>
   );
 }

@@ -1,15 +1,10 @@
-import React from "react";
 import "./Button.css";
 
-function Button({ label, onClick, type = "primary" }) {
+export default function Button({ children, onClick, type = "button", variant = "primary", text }) {
   return (
-    <button
-      className={`custom-btn ${type}`}
-      onClick={onClick}
-    >
-      {label}
+    <button className={`nice-button ${variant}`} onClick={onClick} type={type}>
+      {children}
+      <p>{text}</p>
     </button>
   );
 }
-
-export default Button;

@@ -11,9 +11,7 @@ import { useAuth } from "../context/AuthContext";
 
 
 function Home() {
-  const {user, logout, profile}  = useAuth();
-
-  console.log(profile)
+  const {user, profile}  = useAuth();
 
   return(
     <main className="home">
@@ -23,21 +21,22 @@ function Home() {
           <h1>Stejarul lui Avram Iancu</h1>
           <p>Liciteaza pentru ghinzile</p>
           <div>
-      {user ? (
-        <div style={{ textAlign: "center", marginTop: "3rem" }}>
-          {profile ?
-            <h2>Bun venit, {profile.nickname}!</h2>
-            :
-            <></>
-          }
-          <button onClick={logout}>Logout</button>
-        </div>
-      ) : (
-        <>
-          <AuthModalManager />
-        </>
-      )}
-    </div>
+            {user ? (
+              <div style={{ textAlign: "center", marginTop: "3rem" }}>
+                {profile ?
+                  <h2>Bun venit, {profile.nickname}!</h2>
+                  :
+                  <></>
+                }
+              </div>
+            ) 
+            : 
+            (
+              <>
+                <AuthModalManager />
+              </>
+            )}
+          </div>
         </div>
       </section>
 

@@ -7,16 +7,12 @@ const CardList = ({ products}) => {
 
   const connected = !!user
 
-  const sortedProducts = [...products].sort((a, b) => {
-    return Number(a.name) - Number(b.name);
-  });
-
     return (
       <div className="card-list">
-        {sortedProducts.map((product) => {
+        {products.map((product) => {
           return (
             <>
-            <Card product={product} connected={connected} key={product.id}/>
+              <Card product={product} connected={connected} key={product.name}/>
             </>
           );
         })}

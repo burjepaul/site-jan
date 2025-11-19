@@ -1,0 +1,40 @@
+  .countdown-title {
+    margin-bottom: 18px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-title);
+    letter-spacing: 0.5px;
+  }
+  
+  .countdown-boxes {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    gap: 12px;
+  }
+  
+  .time-box {
+    background: var(--color-component);
+    color: var(--color-title);
+    padding: 12px 14px;
+    border-radius: 12px;
+    width: 60px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .time-value {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .time-label {
+    font-size: 10px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    color: var(--color-title);
+    letter-spacing: 1px;
+  }
+  

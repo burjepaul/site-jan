@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from "../LicitatieModal/LicitatieModal";
 import { supabase } from "../../supabase";
 import { useAuth } from "../../context/AuthContext";
+import "./LicitatieNewModal.css"
 
 export default function NewBidModal({ onClose, productItem, actualPrice, onSuccess }) {
   const [form, setForm] = useState({
@@ -14,8 +15,6 @@ export default function NewBidModal({ onClose, productItem, actualPrice, onSucce
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
-  console.log(productItem)
 
   const handleSubmit =async e => {
     e.preventDefault();
@@ -37,27 +36,29 @@ export default function NewBidModal({ onClose, productItem, actualPrice, onSucce
     }
 
     console.log("SUCCESS:", data);
-    onSuccess();
+    if (onSuccess) await onSuccess();
     onClose(); // close modal after submit
   };
 
   return (
     <Modal onClose={onClose}>
-      <h2>Adaugă Licitație</h2>
-
-      <form onSubmit={handleSubmit} className="modal-form">
-
-        <input
-          type="number"
-          name="amount"
-          placeholder="Sumă"
-          value={form.amount}
-          onChange={handleChange}
-          required
-        />
-
-        <button type="submit" className="modal-submit">Trimite</button>
-      </form>
+      <div className="bid-modal-overlay">
+        <div className="bid-modal">
+          <button className="close-btn" onClick={onClose}>×</button>
+          <h2>Adaugă Licitație</h2>
+          <form onSubmit={handleSubmit} className="modal-form">
+            <input
+              type="number"
+              name="amount"
+              placeholder="Sumă"
+              value={form.amount}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit" className="modal-submit">Trimite</button>
+          </form>
+        </div>
+      </div>
     </Modal>
   );
 }
