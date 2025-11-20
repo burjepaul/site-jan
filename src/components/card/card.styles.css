@@ -38,6 +38,21 @@
   z-index: 1000;
 }
 
+.button-credential{
+  margin-left: 80%;
+}
+
+.modal-credential{
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 16px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  position: relative;
+  animation: fadeIn 0.25s ease-out;
+}
+
 /* Optional: style inside NewBidModal */
 .new-bid-modal {
   background: #fff;

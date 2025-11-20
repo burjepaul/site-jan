@@ -1,25 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import './card.styles.css'
 import certificat from '../../assets/Certificat.jpg'
-import Signup from '../Signup/Signup';
 import { useAuth } from '../../context/AuthContext';
 import { getProfileById } from '../../utils';
 import NewBidModal from '../LicitaiteNowModal/LicitatieNewModal';
 import { supabase } from '../../supabase';
 import CountdownTimer from '../CountDowntimer/CountDownTimer';
 import Button from '../Button/Button';
+import AuthModalManager from '../AuthModal/AuthModalManager';
 
 const Card = ({ product, connected })=> {
     const { user } = useAuth();
     const [profile, setProfile] = useState(null)
     const [cardProduct, setCardProduct] = useState(product)
-    const { name, last_offer, time_of_last_offer, user_with_last_offer } =  cardProduct;
+    const { name, last_offer, time_of_last_offer, user_with_last_offer, bid_closed, bid_started } =  cardProduct;
 
     const [showBid, setShowBid] = useState(false);
 
     const [activeModal, setActiveModal] = useState(false);
-
-    const closeModal = () => setActiveModal(false);
 
     useEffect(() => {
       async function load() {
@@ -39,8 +37,32 @@ const Card = ({ product, connected })=> {
     useEffect(() => {
       loadProducts();   // load on page open
       // eslint-disable-next-line
-    }, []);
+    }, [setShowBid]);
 
+    if ((time_of_last_offer != null) && (bid_closed === false) && (bid_started === true) && new Date(time_of_last_offer) < new Date(Date.now() - 2 * 60 * 60 * 1000)) {
+      // checks the last bid, and if more than 2 hours ago sets bid_colsed to true
+      console.log(cardProduct)
+      const handleClosedBid =async e => {
+        console.log("123:");
+    
+        const { data, error } = await supabase
+        .from("products")
+        .update({
+          bid_closed: true
+        })
+        .eq("name", name); 
+    
+        if (error) {
+          console.error("INSERT ERROR:", error.message);
+          return;
+        }
+    
+        console.log("SUCCESS:", data);
+      };
+
+      handleClosedBid()
+      // older than 2 hours
+  }
     return (
       <>
         <div className="card-container">
@@ -58,14 +80,29 @@ const Card = ({ product, connected })=> {
     
           {connected ? (
             <>
-              <Button onClick={() => setShowBid(true)} text={profile ? "Liciteaza" : "Deschide Licitația"} />
-              {time_of_last_offer ? ( <CountdownTimer startTime={time_of_last_offer} />): <></> }
+              {bid_closed? 
+              <>
+                <Button text={"Licitatie inchisa"} variant='danger'/>
+                {time_of_last_offer ? ( <CountdownTimer startTime={time_of_last_offer} />): <></> }
+              </>
+              :
+              <>
+                <Button onClick={() => setShowBid(true)} text={profile ? "Liciteaza" : "Deschide Licitația"} />
+                {time_of_last_offer ? ( <CountdownTimer startTime={time_of_last_offer} />): <></> }
+              </>}
             </>
           ) : (
             <>
+              {bid_closed? 
+              <>
+                <Button text={"Licitatie inchisa"} variant='danger'/>
+                {time_of_last_offer ? ( <CountdownTimer startTime={time_of_last_offer} />): <></> }
+              </>
+              :
+              <>
               <Button onClick={() => setActiveModal(true)} text={profile ? "Liciteaza" : "Deschide Licitația"} variant='outline' />
-              {activeModal && <Signup onClose={closeModal} />}
               {time_of_last_offer ? ( <CountdownTimer startTime={time_of_last_offer} />): <></> }
+              </>}
             </>
           )}
         </div>
@@ -79,6 +116,15 @@ const Card = ({ product, connected })=> {
               onSuccess={loadProducts}
               onClose={() => setShowBid(false)}
             />
+          </div>
+        )}
+        {activeModal && (
+          <div className="modal-overlay">
+            <div  className='modal-credential'>
+              <button onClick={() => setActiveModal(false)} className='button-credential'>X</button>
+              <h3>Trebuie sa fi logat pentru a licita.</h3>
+              <AuthModalManager onClick={() => console.log(3)}/>
+            </div>
           </div>
         )}
       </>

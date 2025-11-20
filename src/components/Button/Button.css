@@ -60,10 +60,6 @@
 
 /* Danger style example */
 .nice-button.danger {
-  background: #e74c3c;
+  background: #5ee73c;
   color: white;
-}
-
-.nice-button.danger:hover {
-  background: #ff5e4d;
 }

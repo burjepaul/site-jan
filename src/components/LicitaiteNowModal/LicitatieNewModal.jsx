@@ -26,7 +26,8 @@ export default function NewBidModal({ onClose, productItem, actualPrice, onSucce
       last_offer: form.amount,
       user_with_last_offer: user.id,
       second_to_last_offer: actualPrice,
-      time_of_last_offer: new Date().toISOString()
+      time_of_last_offer: new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(),
+      bid_started: true
     })
     .eq("name", productItem); 
 

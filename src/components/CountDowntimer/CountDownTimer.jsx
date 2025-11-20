@@ -5,7 +5,7 @@ export default function CountdownTimer({ startTime }) {
   const [timeLeft, setTimeLeft] = useState(0);
   useEffect(() => {
     const start = new Date(startTime);
-    const endTime = new Date(start.getTime() + 4 * 60 * 60 * 1000);
+    const endTime = new Date(start.getTime() + 2 * 60 * 60 * 1000);
 
     const interval = setInterval(() => {
       const now = new Date();
