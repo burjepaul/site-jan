@@ -97,6 +97,10 @@
     transform: translateY(0);
     box-shadow: 0 4px 10px rgba(0,0,0,0.12);
   }
+
+  .avertizare-pret-mic{
+    color:red;
+  }
   
   /* Fade-in animation */
   @keyframes fadeIn {

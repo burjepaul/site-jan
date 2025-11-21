@@ -41,9 +41,7 @@ const Card = ({ product, connected })=> {
 
     if ((time_of_last_offer != null) && (bid_closed === false) && (bid_started === true) && new Date(time_of_last_offer) < new Date(Date.now() - 2 * 60 * 60 * 1000)) {
       // checks the last bid, and if more than 2 hours ago sets bid_colsed to true
-      console.log(cardProduct)
       const handleClosedBid =async e => {
-        console.log("123:");
     
         const { data, error } = await supabase
         .from("products")
@@ -77,13 +75,22 @@ const Card = ({ product, connected })=> {
           ) : (
             <h4 className='price-info'>Pret initial 100 lei</h4>
           )}
-    
+          {console.log(profile)}
           {connected ? (
             <>
               {bid_closed? 
               <>
-                <Button text={"Licitatie inchisa"} variant='danger'/>
-                {time_of_last_offer ? ( <CountdownTimer startTime={time_of_last_offer} />): <></> }
+                {profile?.id === user.id?
+                <>
+                  <Button text={"Licitatie castigata! Catre plata"} variant='danger'/>
+                  {time_of_last_offer ? ( <CountdownTimer startTime={time_of_last_offer} />): <></> }                
+                </>
+                :
+                <>
+                  <Button text={"Licitatie inchisa"} variant='danger'/>
+                  {time_of_last_offer ? ( <CountdownTimer startTime={time_of_last_offer} />): <></> }
+                </>
+                }
               </>
               :
               <>
@@ -118,12 +125,12 @@ const Card = ({ product, connected })=> {
             />
           </div>
         )}
-        {activeModal && (
+        {activeModal && !connected &&(
           <div className="modal-overlay">
             <div  className='modal-credential'>
               <button onClick={() => setActiveModal(false)} className='button-credential'>X</button>
               <h3>Trebuie sa fi logat pentru a licita.</h3>
-              <AuthModalManager onClick={() => console.log(3)}/>
+              <AuthModalManager/>
             </div>
           </div>
         )}
