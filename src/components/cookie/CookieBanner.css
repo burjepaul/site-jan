@@ -1,0 +1,21 @@
+.cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .cookie-buttons button {
+    margin-left: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
