@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { ReactComponent as Logo } from "../../assets/acorn.svg";
 import { useAuth } from "../../context/AuthContext";
+import AuthModalManager from "../AuthModal/AuthModalManager";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,16 +34,15 @@ function Navbar() {
           <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
           <li><Link to="/licitatie" onClick={() => setMenuOpen(false)}>Licitatie</Link></li>
           <li><Link to="/FAQ" onClick={() => setMenuOpen(false)}>FAQ</Link></li>
-          <li className="nav-user-details">
+          <li>
             {
-                user ?
+              user ?
                   <>
                     <p>{user.email}</p>
                     <button className="nav-button" onClick={logout}>Logout</button>
                   </>
                   :
-                  <>
-                  </>
+                  <AuthModalManager/>
             }
           </li>
         </ul>

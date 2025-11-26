@@ -75,7 +75,6 @@ const Card = ({ product, connected })=> {
           ) : (
             <h4 className='price-info'>Pret initial 100 lei</h4>
           )}
-          {console.log(profile)}
           {connected ? (
             <>
               {bid_closed? 

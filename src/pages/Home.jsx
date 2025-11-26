@@ -5,9 +5,7 @@ import autc from '../assets/autentic.jpg';
 import incoltire from '../assets/incoltire.jpg'
 import plante from '../assets/plante.jpg'
 import comunitate from '../assets/comunitate.jpg'
-import AuthModalManager from "../components/AuthModal/AuthModalManager";
 import { useAuth } from "../context/AuthContext";
-
 
 
 function Home() {
@@ -33,7 +31,6 @@ function Home() {
             : 
             (
               <>
-                <AuthModalManager />
               </>
             )}
           </div>

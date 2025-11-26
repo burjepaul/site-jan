@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 import CardList from "../components/card-list/card-list.component";
+import "./Licitatie.css"
 
 function Licitatie() {
   const [products, setProducts] = useState([]);
@@ -88,34 +89,38 @@ function Licitatie() {
       <CardList key={currentPage} products={currentProducts} />
 
       {/* Pagination */}
-      <div style={{ marginTop: "20px", display: "flex", gap: "8px", alignItems: "center" }}>
+      <div className="pagination">
+      <button
+        onClick={() => handlePageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        {"< Prev"}
+      </button>
 
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-          {"< Prev"}
-        </button>
-
-        {pageNumbers.map((num, index) => (
-          <button
+      {pageNumbers.map((num, index) => (
+        <button
           key={index}
           onClick={() => typeof num === "number" && handlePageChange(num)}
-            disabled={num === "..."}
-            style={{
-              fontWeight: currentPage === num ? "bold" : "normal",
-              cursor: num === "..." ? "default" : "pointer",
-              padding: "5px 10px",
-              border: "1px solid #ccc",
-              background: currentPage === num ? "#eee" : "white"
-            }}
-          >
-            {num}
-          </button>
-        ))}
-
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          {"Next >"}
+          disabled={num === "..."}
+          className={
+            num === currentPage
+              ? "active-page"
+              : num === "..."
+              ? "ellipsis"
+              : ""
+          }
+        >
+          {num}
         </button>
+      ))}
 
-      </div>
+      <button
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        {"Next >"}
+      </button>
+    </div>
     </div>
   );
 }
