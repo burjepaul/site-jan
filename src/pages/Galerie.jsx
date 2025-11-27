@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Galerie.css";
+import { useLanguage } from "../context/LanguageContext.jsx";
+import languages_text from '../const.js'
 
 function Galerie() {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const {language} = useLanguage();
+  const text = languages_text[language]
 
   useEffect(() => {
     const importAll = (r) => r.keys().map(r);
@@ -24,7 +29,7 @@ function Galerie() {
 
   return (
     <div className="gallery-page">
-      <h1 className="gallery-title">Galerie Photo</h1>
+      <h1 className="gallery-title">{text.galleryTitle}</h1>
 
       <div className="gallery-grid">
         {images.map((src, index) => (

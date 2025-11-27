@@ -1,28 +1,31 @@
 import React from "react";
 import './Home.css';
-import Button from "../components/Button/Button";
 import autc from '../assets/autentic.jpg';
 import incoltire from '../assets/incoltire.jpg'
 import plante from '../assets/plante.jpg'
 import comunitate from '../assets/comunitate.jpg'
 import { useAuth } from "../context/AuthContext";
-
+import { useLanguage } from "../context/LanguageContext.jsx";
+import languages_text from '../const.js'
 
 function Home() {
   const {user, profile}  = useAuth();
+
+  const {language} = useLanguage();
+  const text = languages_text[language]
 
   return(
     <main className="home">
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <h1>Stejarul lui Avram Iancu</h1>
-          <p>Liciteaza pentru ghinzile</p>
+          <h1>{text.homeHeroTitle}</h1>
+          <p>{text.homeHeroSubTitle}</p>
           <div>
             {user ? (
               <div style={{ textAlign: "center", marginTop: "3rem" }}>
                 {profile ?
-                  <h2>Bun venit, {profile.nickname}!</h2>
+                  <h2>{text.homeHeroGreeting} {profile.nickname}!</h2>
                   :
                   <></>
                 }
@@ -39,22 +42,22 @@ function Home() {
 
       {/* Why Choose Us */}
       <section className="features">
-        <h2>Ce oferim</h2>
+        <h2>{text.featuresTitle}</h2>
         <div className="feature-grid">
           <div className="feature-card">
             <img src={autc} alt="Expert Guides" />
-            <h3>Autenticitate</h3>
-            <p>Ghinzi culese din stefarul autentic.</p>
+            <h3>{text.features1Title}</h3>
+            <p>{text.features1Text}</p>
           </div>
           <div className="feature-card">
             <img src={incoltire} className="feature-img" alt="Small Groups" />
-            <h3>Incoltite</h3>
-            <p>Incoltite cu grija in pamantul stramosesc.</p>
+            <h3>{text.features2Title}</h3>
+            <p>{text.features2Text}</p>
           </div>
           <div className="feature-card">
             <img src={plante} className="feature-img" alt="Flexible Schedule" />
-            <h3>Plante sanatoase</h3>
-            <p>Plante care au crescut.</p>
+            <h3>{text.features3Title}</h3>
+            <p>{text.features3Text}</p>
           </div>
         </div>
       </section>
@@ -65,44 +68,39 @@ function Home() {
           <img src={comunitate} alt="Featured Tour" />
         </div>
         <div className="tour-text">
-          <h2>Alaturet comunitatii noastre</h2>
+          <h2>{text.tourTitle}</h2>
           <p>
-            Creazati cont si alaturate comunitatii noastre, apoi incepe licitatia..
+          {text.tourText}
           </p>
-          <Button
-              label="Sign Up"
-              type="primary"
-              onClick={() => alert("Button clicked!")}
-            />
         </div>
       </section>
 
       {/* Testimonials */}
       <section className="testimonials">
-        <h2>Ce spun membrii nostri</h2>
+        <h2>{text.testimonialsTitle}</h2>
         <div className="testimonial">
           <p>
-          „Când plantez o ghindă, simt că las un semn mic, dar plin de viață, pentru cei care vor veni după mine.”
+            {text.testimonials1Text}
           </p>
-          <h4>– Irina Dobre</h4>
+          <h4>{text.testimonials1Name}</h4>
         </div>
         <div className="testimonial">
           <p>
-            “În fiecare duminică ne adunăm, râdem, și punem mâna pe pământ. Așa cresc nu doar stejarii, ci și prieteniile dintre noi.”
+          {text.testimonials2Text}
           </p>
-          <h4>– Mihai Roșu</h4>
+          <h4>{text.testimonials2Name}</h4>
         </div>
         <div className="testimonial">
           <p>
-            “Voluntariatul ne-a învățat că adevărata răbdare nu e să aștepți ca ghinda să încolțească, ci să crezi că fiecare gest bun are rădăcini adânci.”
+          {text.testimonials3Text}
           </p>
-          <h4>– Lavinia Stoenescu</h4>
+          <h4>{text.testimonials3Name}</h4>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="footer">
-        <p>© {new Date().getFullYear()} Ghindă cu Ghindă. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {text.footer}</p>
       </footer>
     </main>    
   )
